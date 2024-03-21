@@ -127,20 +127,27 @@ void write_to_word_doc(float cgpa) {
     fclose(file);
 }
 
+// Function to allow user to input their own details
+void input_student_details(StudentData *student) {
+    printf("Enter marks for each course:\n");
+    int i;
+    for (i = 0; i < NUM_COURSES; i++) {
+        printf("Enter marks for Course %d: ", i + 1);
+        scanf("%d", &student->marks[i]);
+    }
+}
+
 int main() {
     StudentData student;
     float cgpa;
     int student_numbers[TOTAL_STUDENTS] = {216022204, 216002204, 216007570, 216002774};
     int credit_units[NUM_COURSES];
 
-    // Initialize student data (marks)
-    student.marks[0] = 80;
-    student.marks[1] = 75;
-    student.marks[2] = 85;
-    student.marks[3] = 90;
-
     // Initialize course data
     initialize_courses(&student);
+
+    // Allow user to input their own details
+    input_student_details(&student);
 
     // Calculate CGPA
     cgpa = calculate_cgpa(&student);
